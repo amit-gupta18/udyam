@@ -1,0 +1,30 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model UdyamSubmission {
+  id                   Int      @id @default(autoincrement())
+  aadhaar_no           String   @unique
+  owner_name           String
+  declaration_accepted Boolean
+  organisation_type    String?
+  pan_no               String?  @unique
+  gstin                String?
+  created_at           DateTime @default(now())
+
+  @@index([aadhaar_no])
+  @@index([pan_no])
+}
+
+model User{
+  id                  Int       @id @default(autoincrement())
+  aadhar_no           String    @unique
+  entrepreneur_name   String  
+}
+
